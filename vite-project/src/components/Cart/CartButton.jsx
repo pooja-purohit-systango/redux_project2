@@ -1,20 +1,18 @@
-import {useSelector, useDispatch} from 'react-redux'
-import { uiActions } from '../../store/UI'
+import { useDispatch, useSelector } from 'react-redux';
+import { uiActions } from '../../store/UI';
 
 const CartButton = (props) => {
+  const dispatch = useDispatch();
+  const cartQuantity = useSelector((state) => state.cart.totalQuantity);
 
-    const total_cart = useSelector((state) => state.cart.cartcount)
-
-    const dispatch = useDispatch();
-
-    const cartVisibiltyHandler = () => {
-        dispatch(uiActions.toggle())
-    }
+  const toggleCartHandler = () => {
+    dispatch(uiActions.toggle());
+  };
 
   return (
-    <button  onClick={cartVisibiltyHandler}>
-      <span>My Cart</span>
-      <span> : {total_cart}</span>
+    <button onClick={toggleCartHandler}>
+      <span>My Cart : </span>
+      <span>{cartQuantity}</span>
     </button>
   );
 };
